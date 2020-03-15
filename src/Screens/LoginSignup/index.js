@@ -13,6 +13,7 @@ export default class LoginSignup extends Component {
       formValues: {
         email: '',
         password: '',
+        username: ''
       },
     };
   }
@@ -31,16 +32,26 @@ export default class LoginSignup extends Component {
       signIn(this.state.formValues.email, this.state.formValues.password);
     } else if (this.method === 'signup') {
       registerWithFirebase(
-        this.state.formValues.email,
+        this.state.formValues.email.trim(),
         this.state.formValues.password,
+        this.state.formValues.username
       );
     }
   };
 
   render() {
-    const {email, password, signup, login} = this.state;
+    const {email, password, signup, login, username} = this.state;
     return (
       <View style={styles.container}>
+        {this.method === 'signup' && (
+          <CustomInput
+            value={username}
+            accessoryViewId={'username'}
+            label="Username"
+            onChangeText={text => this.setFormField('username', text)}
+          />
+        )}
+
         <CustomInput
           value={email}
           accessoryViewId={'email'}

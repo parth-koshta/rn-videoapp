@@ -1,17 +1,26 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
+import {Header} from '../../Components';
+import {AuthContext} from '../AuthNavigator/utils';
 
 export default class HomeScreen extends Component {
-    constructor(props){
-        super(props);
-    }
+  static contextType = AuthContext;
+  constructor(props) {
+    super(props);
+    this.user = this.context;
+  }
+
   render() {
     return (
-      <View>
-        <TouchableOpacity>
-          <Text> HomeScreen </Text>
-        </TouchableOpacity>
-      </View>
+      <AuthContext.Consumer>
+        {props => {
+          return (
+            <View>
+              <Header />
+            </View>
+          );
+        }}
+      </AuthContext.Consumer>
     );
   }
 }
