@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "65225703343",
+    "firebase_url": "https://rn-fb-auth-105be.firebaseio.com",
+    "project_id": "rn-fb-auth-105be",
+    "storage_bucket": "rn-fb-auth-105be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65225703343:android:7abbd407522a6df7f4395a",
+        "android_client_info": {
+          "package_name": "com.avalon_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65225703343-turofbtj404145rgrbtuhhhqd3madnct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCALzO1OsKjzRgAbeG-gDZGp4T_x-yxEvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65225703343-turofbtj404145rgrbtuhhhqd3madnct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
