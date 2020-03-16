@@ -1,23 +1,26 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {View, Text, FlatList, ScrollView} from 'react-native';
 
 const getFormattedDate = date => {
-    var date = new Date(date);
-    var str =
-      date.getFullYear() +
-      '-' +
-      (date.getMonth() + 1) +
-      '-' +
-      date.getDate() +
-      ' ' +
-      date.getHours() +
-      ':' +
-      date.getMinutes() +
-      ':' +
-      date.getSeconds();
-    return str;
-  };
+  var date = new Date(date);
+  var str =
+    date.getFullYear() +
+    '-' +
+    (date.getMonth() + 1) +
+    '-' +
+    date.getDate() +
+    ' ' +
+    date.getHours() +
+    ':' +
+    date.getMinutes() +
+    ':' +
+    date.getSeconds();
+  return str;
+};
+
+const seperator = () => {
+  return <View style={{height: 10}} />;
+};
 
 const CommentsList = ({comments}) => {
   let commentsList = Object.values(comments);
@@ -26,7 +29,6 @@ const CommentsList = ({comments}) => {
       data={commentsList}
       keyExtractor={item => item.time.toString()}
       renderItem={({item, index}) => {
-          console.log(item, 'item from list')
         return (
           <View
             style={{
@@ -36,21 +38,30 @@ const CommentsList = ({comments}) => {
               marginVertical: 5,
               borderBottomWidth: 0.5,
             }}>
-            <View>
-              <Text style={{fontSize: 10, fontWeight: 'bold'}}>
-                {item.userName}
+            <View style={{width: '80%'}}>
+              <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+                {item.userName}:
               </Text>
-              <Text style={{paddingLeft: 10}}>
+              <Text style={{paddingLeft: 10, fontSize: 12}}>
                 {item.comment}
               </Text>
             </View>
 
-            <Text style={{fontSize: 8, alignSelf: 'flex-end'}}>
+            <Text
+              style={{
+                fontSize: 8,
+                alignSelf: 'flex-end',
+                fontWeight: 'bold',
+              }}>
               {getFormattedDate(item.time)}
             </Text>
           </View>
         );
       }}
+      style={{
+        marginTop: 20
+      }}
+      ItemSeparatorComponent={() => seperator()}
     />
   );
 };

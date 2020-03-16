@@ -36,6 +36,8 @@ target 'avalon_test' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'avalon_testTests' do
     inherit! :search_paths
     # Pods for testing

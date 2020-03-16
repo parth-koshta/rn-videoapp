@@ -22,7 +22,7 @@ export default class LoginSignup extends Component {
     this.setState(state => ({
       formValues: {
         ...state.formValues,
-        [key]: value,
+        [key]: value.trim(),
       },
     }));
   };
