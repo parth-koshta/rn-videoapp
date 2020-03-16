@@ -14,6 +14,7 @@ const Header = () => {
         justifyContent: 'flex-end',
         alignItems: 'center',
         paddingHorizontal: 20,
+        backgroundColor: Colors.WHITE
       }}>
       <TouchableOpacity onPress={() => signOut()}>
         <Image
