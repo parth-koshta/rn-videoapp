@@ -13,10 +13,22 @@ export default class LoginSignup extends Component {
       formValues: {
         email: '',
         password: '',
-        username: ''
+        username: '',
       },
     };
   }
+
+  validate = text => {
+    console.log(text);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(text) === false) {
+      console.log('Email is Not Correct');
+      return false;
+    } else {
+      console.log('Email is Correct');
+      return true;
+    }
+  };
 
   setFormField = (key, value) => {
     this.setState(state => ({
@@ -28,14 +40,24 @@ export default class LoginSignup extends Component {
   };
 
   authenticate = () => {
-    if (this.method === 'login') {
-      signIn(this.state.formValues.email, this.state.formValues.password);
-    } else if (this.method === 'signup') {
-      registerWithFirebase(
-        this.state.formValues.email.trim(),
-        this.state.formValues.password,
-        this.state.formValues.username
-      );
+    if (!this.validate(this.state.formValues.email)) {
+      alert('Please enter correct email.');
+    } else if (!this.state.formValues.password) {
+      alert('Password cannot be blank');
+    } else {
+      if (this.method === 'login') {
+        signIn(this.state.formValues.email, this.state.formValues.password);
+      } else if (this.method === 'signup') {
+        if (!this.state.formValues.username) {
+          alert('Username cannot be blank.');
+        } else {
+          registerWithFirebase(
+            this.state.formValues.email.trim(),
+            this.state.formValues.password,
+            this.state.formValues.username,
+          );
+        }
+      }
     }
   };
 
@@ -56,7 +78,7 @@ export default class LoginSignup extends Component {
           value={email}
           accessoryViewId={'email'}
           label="Email"
-          autoCapitalize = 'none'
+          autoCapitalize="none"
           onChangeText={text => this.setFormField('email', text)}
         />
 
