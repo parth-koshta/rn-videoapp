@@ -21,7 +21,6 @@ const AuthNavigator = () => {
   }, []);
 
   if (initializing) return null;
-
   return user ? (
     <AuthContext.Provider value={user}>
       <AuthenticatedStack />

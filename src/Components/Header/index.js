@@ -4,18 +4,22 @@ import {Icons} from '../../Shared';
 import {signOut} from '../../APIs';
 import {Colors} from '../../Theme';
 
-const Header = () => {
+const Header = ({name}) => {
   return (
     <View
       style={{
         height: 60,
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 20,
-        backgroundColor: Colors.WHITE
+        backgroundColor: Colors.WHITE,
       }}>
+      <Text style={{
+        fontSize: 16,
+        fontWeight: 'bold'
+      }}>Hi {name}</Text>
       <TouchableOpacity onPress={() => signOut()}>
         <Image
           source={Icons.logout}

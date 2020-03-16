@@ -56,6 +56,7 @@ export default class LoginSignup extends Component {
           value={email}
           accessoryViewId={'email'}
           label="Email"
+          autoCapitalize = 'none'
           onChangeText={text => this.setFormField('email', text)}
         />
 

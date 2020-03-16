@@ -18,6 +18,9 @@ const CustomInput = React.forwardRef(
       style,
       labelStyle,
       labelWrapperStyle,
+      noLabel = false,
+      inputStyle,
+      placeholder
     },
     ref,
   ) => {
@@ -34,12 +37,15 @@ const CustomInput = React.forwardRef(
           onSubmitEditing={onSubmitEditing}
           autoCapitalize={autoCapitalize}
           numberOfLines={1}
-          style={styles.input}
+          style={[styles.input, inputStyle]}
           multiline={multiline}
+          placeholder={placeholder}
         />
-        <View style={[styles.placeholderWrapper, labelWrapperStyle]}>
-          <Text style={[styles.label, labelStyle]}>{label}</Text>
-        </View>
+        {!noLabel && (
+          <View style={[styles.placeholderWrapper, labelWrapperStyle]}>
+            <Text style={[styles.label, labelStyle]}>{label}</Text>
+          </View>
+        )}
       </View>
     );
   },

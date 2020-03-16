@@ -1,15 +1,16 @@
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 
 export const registerWithFirebase = async (email, password, displayName) => {
   try {
-    let user = await auth().createUserWithEmailAndPassword(email, password);
-    console.log(user);
-    if(user.additionalUserInfo.isNewUser){
-      let newUser = auth().currentUser;
-      newUser.updateProfile({
-        displayName: displayName
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        database().ref('users/' + res.user.uid).set({
+          userName: displayName,
+          email: email
       })
-    }
+      });
   } catch (e) {
     alert(e);
   }
