@@ -19,13 +19,10 @@ export default class LoginSignup extends Component {
   }
 
   validate = text => {
-    console.log(text);
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (reg.test(text) === false) {
-      console.log('Email is Not Correct');
       return false;
     } else {
-      console.log('Email is Correct');
       return true;
     }
   };
