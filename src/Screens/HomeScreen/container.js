@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {
   Text,
   View,
@@ -153,7 +153,6 @@ export default class HomeScreen extends Component {
   };
 
   render() {
-    // console.log(this.state);
     const {currentTime, isPaused, video, commentText} = this.state;
     return (
       <ScrollView>
@@ -163,71 +162,59 @@ export default class HomeScreen extends Component {
               <View style={styles.container}>
                 <Header name={this.state.userName} />
                 {Object.keys(this.state.video).length ? (
-                  <VideoPlayer
-                    ref={ref => {
-                      this.player = ref;
-                    }}
-                    video={video}
-                    onBuffer={this.onBuffer.bind(this)}
-                    onProgress={this.progress.bind(this)}
-                    isPaused={isPaused}
-                    onEnd={this.onEnd.bind(this)}
-                    onBackPress={this.seek.bind(this, 'backward')}
-                    onForwardPress={this.seek.bind(this, 'forward')}
-                    currentTime={currentTime}
-                    onPlayPause={this.togglePlay.bind(this)}
-                  />
+                  <Fragment>
+                    <VideoPlayer
+                      ref={ref => {
+                        this.player = ref;
+                      }}
+                      video={video}
+                      onBuffer={this.onBuffer.bind(this)}
+                      onProgress={this.progress.bind(this)}
+                      isPaused={isPaused}
+                      onEnd={this.onEnd.bind(this)}
+                      onBackPress={this.seek.bind(this, 'backward')}
+                      onForwardPress={this.seek.bind(this, 'forward')}
+                      currentTime={currentTime}
+                      onPlayPause={this.togglePlay.bind(this)}
+                    />
+
+                    <View style={{padding: 10, width: '100%'}}>
+                      <Text style={{fontSize: 10}}>Comments</Text>
+                      <View style={styles.inputWrapper}>
+                        <CustomInput
+                          value={commentText}
+                          accessoryViewId={'commentText'}
+                          noLabel
+                          autoCapitalize="none"
+                          onChangeText={text =>
+                            this.setFormField('commentText', text)
+                          }
+                          inputStyle={styles.input}
+                          style={styles.inputStyleProp}
+                          placeholder="Write comment..."
+                        />
+                        <TouchableOpacity
+                          style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                          onPress={this.postComment.bind(this)}>
+                          <ImageIcon source={Icons.send} />
+                        </TouchableOpacity>
+                      </View>
+                      <View>
+                        {video.comments &&
+                          Object.keys(video.comments).length && (
+                            <CommentsList comments={video.comments} />
+                          )}
+                      </View>
+                    </View>
+                  </Fragment>
                 ) : (
                   <View style={{alignSelf: 'center', marginTop: '20%'}}>
                     <ActivityIndicator size="large" />
                   </View>
                 )}
-                <View style={{padding: 10, width: '100%'}}>
-                  <Text style={{fontSize: 10}}>Comments</Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      width: '100%',
-                      paddingHorizontal: 10,
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}>
-                    <CustomInput
-                      value={commentText}
-                      accessoryViewId={'commentText'}
-                      noLabel
-                      autoCapitalize="none"
-                      onChangeText={text =>
-                        this.setFormField('commentText', text)
-                      }
-                      inputStyle={{
-                        backgroundColor: 'transparent',
-                        borderWidth: 0,
-                        borderBottomWidth: 1,
-                        borderBottomColor: Colors.BLACK,
-                        color: Colors.BLACK,
-                      }}
-                      style={{
-                        padding: 0,
-                        marginVertical: 0,
-                      }}
-                      placeholder="Write comment..."
-                    />
-                    <TouchableOpacity
-                      style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      onPress={this.postComment.bind(this)}>
-                      <ImageIcon source={Icons.send} />
-                    </TouchableOpacity>
-                  </View>
-                  <View>
-                    {video.comments && Object.keys(video.comments).length && (
-                      <CommentsList comments={video.comments} />
-                    )}
-                  </View>
-                </View>
               </View>
             );
           }}

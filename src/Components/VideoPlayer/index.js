@@ -11,6 +11,7 @@ import {Colors} from '../../Theme';
 import {Icons} from '../../Shared';
 import Video from 'react-native-video';
 import ImageIcon from '../ImageIcon';
+import styles from './styles';
 
 const {width} = Dimensions.get('window');
 const playerHeight = width / (16 / 9);
@@ -47,23 +48,14 @@ const VideoPlayer = React.forwardRef(
     const [quality, setQuality] = useState(480);
 
     return (
-      <View style={{width: '100%', backgroundColor: Colors.WHITE}}>
-        <View
-          style={{
-            width: width,
-            height: playerHeight,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+      <View style={styles.container}>
+        <View style={styles.videoWrapper}>
           <Video
             source={{uri: video.videoUrl}}
             ref={ref}
             onBuffer={onBuffer}
             onError={e => console.log(e, 'error')}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
+            style={styles.video}
             onProgress={onProgress}
             paused={isPaused}
             selectedVideoTrack={{
@@ -75,14 +67,7 @@ const VideoPlayer = React.forwardRef(
             // controls
             poster={video.posterUrl}
           />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '100%',
-              paddingHorizontal: 20,
-              position: 'absolute',
-            }}>
+          <View style={styles.seekWrapper}>
             <TouchableOpacity onPress={onBackPress}>
               <ImageIcon source={Icons.backward} size={45} />
             </TouchableOpacity>
@@ -91,15 +76,7 @@ const VideoPlayer = React.forwardRef(
             </TouchableOpacity>
           </View>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '100%',
-              paddingHorizontal: 10,
-              position: 'absolute',
-              bottom: 20,
-            }}>
+          <View style={styles.nameWrapper}>
             <Text style={{color: Colors.WHITE}}>{video.name}</Text>
 
             <Text style={{color: Colors.WHITE}}>
@@ -108,42 +85,16 @@ const VideoPlayer = React.forwardRef(
           </View>
         </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            width: '100%',
-            paddingHorizontal: 20,
-            paddingVertical: 20,
-            alignItems: 'center',
-          }}>
+        <View style={styles.playWrapper}>
           <TouchableOpacity
             onPress={onPlayPause}
             hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-            <Image
-              source={isPaused ? Icons.play : Icons.pause}
-              style={{
-                height: 20,
-                width: 20,
-              }}
-              resizeMode="contain"
-            />
+            <ImageIcon source={isPaused ? Icons.play : Icons.pause} size={35} />
           </TouchableOpacity>
           <View style={{width: '60%', alignItems: 'flex-end'}}>
-            <Text
-              style={{
-                fontSize: 8,
-                fontWeight: 'bold',
-                alignSelf: 'center'
-              }}>
-              Quality
-            </Text>
+            <Text style={styles.quality}>Quality</Text>
             <Picker
-              style={{
-                width: '60%',
-                color: '#344953',
-                justifyContent: 'center',
-              }}
+              style={styles.picker}
               selectedValue={quality}
               onValueChange={(itemValue, itemPosition) =>
                 setQuality(itemValue)

@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, FlatList, ScrollView} from 'react-native';
+import styles from './styles';
 
 const getFormattedDate = date => {
   var date = new Date(date);
@@ -30,37 +31,17 @@ const CommentsList = ({comments}) => {
       keyExtractor={item => item.time.toString()}
       renderItem={({item, index}) => {
         return (
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 20,
-              marginVertical: 5,
-              borderBottomWidth: 0.5,
-            }}>
-            <View style={{width: '80%'}}>
-              <Text style={{fontSize: 12, fontWeight: 'bold'}}>
-                {item.userName}:
-              </Text>
-              <Text style={{paddingLeft: 10, fontSize: 12}}>
-                {item.comment}
-              </Text>
+          <View style={styles.listWrapper}>
+            <View style={styles.colWrapper}>
+              <Text style={styles.name}>{item.userName}:</Text>
+              <Text style={styles.comment}>{item.comment}</Text>
             </View>
 
-            <Text
-              style={{
-                fontSize: 8,
-                alignSelf: 'flex-end',
-                fontWeight: 'bold',
-              }}>
-              {getFormattedDate(item.time)}
-            </Text>
+            <Text style={styles.time}>{getFormattedDate(item.time)}</Text>
           </View>
         );
       }}
-      style={{
-        marginTop: 20
-      }}
+      style={styles.mainStyle}
       ItemSeparatorComponent={() => seperator()}
     />
   );
