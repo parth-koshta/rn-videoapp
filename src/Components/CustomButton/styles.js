@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../Theme';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   wrapper: {
     paddingVertical: 10,
     paddingHorizontal: 40,
@@ -15,3 +15,5 @@ export default styles = StyleSheet.create({
       fontSize: 16
   }
 });
+
+export default styles;
