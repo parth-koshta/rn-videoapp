@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, Text, Dimensions, TouchableOpacity, Image} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  Image,
+  Picker,
+} from 'react-native';
 import {Colors} from '../../Theme';
 import {Icons} from '../../Shared';
 import Video from 'react-native-video';
@@ -35,6 +42,10 @@ const VideoPlayer = React.forwardRef(
     },
     ref,
   ) => {
+    const qualities = [144, 240, 360, 480, 720];
+
+    const [quality, setQuality] = useState(480);
+
     return (
       <View style={{width: '100%', backgroundColor: Colors.WHITE}}>
         <View
@@ -57,7 +68,7 @@ const VideoPlayer = React.forwardRef(
             paused={isPaused}
             selectedVideoTrack={{
               type: 'resolution',
-              value: 420,
+              value: quality,
             }}
             onEnd={onEnd}
             resizeMode="stretch"
@@ -72,12 +83,10 @@ const VideoPlayer = React.forwardRef(
               paddingHorizontal: 20,
               position: 'absolute',
             }}>
-            <TouchableOpacity
-              onPress={onBackPress}>
+            <TouchableOpacity onPress={onBackPress}>
               <ImageIcon source={Icons.backward} size={45} />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={onForwardPress}>
+            <TouchableOpacity onPress={onForwardPress}>
               <ImageIcon source={Icons.forward} size={45} />
             </TouchableOpacity>
           </View>
@@ -104,8 +113,9 @@ const VideoPlayer = React.forwardRef(
             flexDirection: 'row',
             justifyContent: 'space-between',
             width: '100%',
-            paddingHorizontal: 10,
+            paddingHorizontal: 20,
             paddingVertical: 20,
+            alignItems: 'center',
           }}>
           <TouchableOpacity
             onPress={onPlayPause}
@@ -119,6 +129,30 @@ const VideoPlayer = React.forwardRef(
               resizeMode="contain"
             />
           </TouchableOpacity>
+          <View style={{width: '60%', alignItems: 'flex-end'}}>
+            <Text
+              style={{
+                fontSize: 8,
+                fontWeight: 'bold',
+                alignSelf: 'center'
+              }}>
+              Quality
+            </Text>
+            <Picker
+              style={{
+                width: '60%',
+                color: '#344953',
+                justifyContent: 'center',
+              }}
+              selectedValue={quality}
+              onValueChange={(itemValue, itemPosition) =>
+                setQuality(itemValue)
+              }>
+              {qualities.map(item => (
+                <Picker.Item label={`${item}p`} value={item} key={item} />
+              ))}
+            </Picker>
+          </View>
         </View>
       </View>
     );
