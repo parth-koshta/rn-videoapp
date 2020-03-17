@@ -116,22 +116,24 @@ export default class HomeScreen extends Component {
 
   postComment = () => {
     const {uid, userName, commentText} = this.state;
-    let data = {
-      userId: uid,
-      userName: userName,
-      comment: commentText
+    if (commentText) {
+      let data = {
+        userId: uid,
+        userName: userName,
+        comment: commentText,
+      };
+      database()
+        .ref(`videos/${this.state.videoId}/comments`)
+        .push(data)
+        .then(res => {
+          if (res.key) {
+            this.setState({
+              commentText: '',
+            });
+          }
+        })
+        .catch(e => alert(e));
     }
-    database()
-      .ref(`videos/${this.state.videoId}/comments`)
-      .push(data)
-      .then(res => {
-        if (res.key) {
-          this.setState({
-            commentText: '',
-          });
-        }
-      })
-      .catch(e => alert(e));
   };
 
   onBuffer = e => {
