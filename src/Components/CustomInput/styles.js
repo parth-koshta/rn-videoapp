@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../Theme/Colors';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     padding: 5,
     width: '90%',
@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     borderRadius: 8,
     paddingLeft: 10,
     color: Colors.WHITE,
-    height: 60
+    height: 60,
   },
   placeholderWrapper: {
     position: 'absolute',
@@ -24,6 +24,8 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   label: {
-    color: Colors.RED
+    color: Colors.RED,
   },
 });
+
+export default styles;
