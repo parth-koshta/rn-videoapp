@@ -65,9 +65,6 @@ export default class HomeScreen extends Component {
       .ref('/videos')
       .on('value', querySnapShot => {
         let data = querySnapShot.val() ? querySnapShot.val() : {};
-        console.log(data, 'dataaa');
-        let timestamp = querySnapShot;
-        console.log(timestamp)
         let videoId = Object.keys(data)[0];
         this.setState({
           video: data[videoId],
