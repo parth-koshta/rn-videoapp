@@ -65,7 +65,9 @@ export default class HomeScreen extends Component {
       .ref('/videos')
       .on('value', querySnapShot => {
         let data = querySnapShot.val() ? querySnapShot.val() : {};
-
+        console.log(data, 'dataaa');
+        let timestamp = querySnapShot;
+        console.log(timestamp)
         let videoId = Object.keys(data)[0];
         this.setState({
           video: data[videoId],
@@ -117,14 +119,14 @@ export default class HomeScreen extends Component {
 
   postComment = () => {
     const {uid, userName, commentText} = this.state;
+    let data = {
+      userId: uid,
+      userName: userName,
+      comment: commentText
+    }
     database()
       .ref(`videos/${this.state.videoId}/comments`)
-      .push({
-        userId: uid,
-        userName: userName,
-        comment: commentText,
-        time: new Date(),
-      })
+      .push(data)
       .then(res => {
         if (res.key) {
           this.setState({

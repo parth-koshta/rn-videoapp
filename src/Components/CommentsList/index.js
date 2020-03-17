@@ -29,7 +29,7 @@ const CommentsList = ({comments}) => {
     <FlatList
       showsVerticalScrollIndicator={false}
       data={commentsList}
-      keyExtractor={item => item.time.toString()}
+      keyExtractor={(item, index) => index.toString()}
       renderItem={({item, index}) => {
         return (
           <View style={styles.listWrapper}>
@@ -38,7 +38,7 @@ const CommentsList = ({comments}) => {
               <Text style={styles.comment}>{item.comment}</Text>
             </View>
 
-            <Text style={styles.time}>{getFormattedDate(item.time)}</Text>
+            {/* <Text style={styles.time}>{getFormattedDate(item.time)}</Text> */}
           </View>
         );
       }}
