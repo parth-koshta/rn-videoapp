@@ -6,8 +6,10 @@ import styles from './styles';
 describe('CustomButton', () => {
     describe('Rendering', () => {
         it('should match to snapshot', () => {
-            const component = shallow(<CustomButton label="test label!" onPress={()=>alert('hi')}/>)
+            const component = shallow(<CustomButton label="test label!"/>)
             expect(component).toMatchSnapshot()
         });
     });
+
 });
+

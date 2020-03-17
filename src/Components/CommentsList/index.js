@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList, ScrollView} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import styles from './styles';
 
 const getFormattedDate = date => {
@@ -27,6 +27,7 @@ const CommentsList = ({comments}) => {
   let commentsList = Object.values(comments);
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       data={commentsList}
       keyExtractor={item => item.time.toString()}
       renderItem={({item, index}) => {

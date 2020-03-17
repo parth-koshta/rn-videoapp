@@ -7,6 +7,7 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginVertical: 5,
     borderBottomWidth: 0.5,
+    paddingVertical: 5
   },
   colWrapper: {width: '80%'},
   name: {fontSize: 12, fontWeight: 'bold'},

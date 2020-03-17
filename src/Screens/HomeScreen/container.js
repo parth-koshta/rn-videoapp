@@ -7,6 +7,7 @@ import {
   Dimensions,
   ActivityIndicator,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import {
   Header,
@@ -155,7 +156,8 @@ export default class HomeScreen extends Component {
   render() {
     const {currentTime, isPaused, video, commentText} = this.state;
     return (
-      <ScrollView>
+      // <ScrollView>
+      <View style={styles.fullFlex}>
         <AuthContext.Consumer>
           {props => {
             return (
@@ -178,8 +180,8 @@ export default class HomeScreen extends Component {
                       onPlayPause={this.togglePlay.bind(this)}
                     />
 
-                    <View style={{padding: 10, width: '100%'}}>
-                      <Text style={{fontSize: 10}}>Comments</Text>
+                    <View style={styles.commentsWrapper}>
+                      <Text style={styles.fontSmall}>Comments</Text>
                       <View style={styles.inputWrapper}>
                         <CustomInput
                           value={commentText}
@@ -194,15 +196,12 @@ export default class HomeScreen extends Component {
                           placeholder="Write comment..."
                         />
                         <TouchableOpacity
-                          style={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}
+                          style={styles.allCenter}
                           onPress={this.postComment.bind(this)}>
                           <ImageIcon source={Icons.send} />
                         </TouchableOpacity>
                       </View>
-                      <View>
+                      <View style={styles.fullFlex}>
                         {video.comments &&
                           Object.keys(video.comments).length && (
                             <CommentsList comments={video.comments} />
@@ -211,7 +210,7 @@ export default class HomeScreen extends Component {
                     </View>
                   </Fragment>
                 ) : (
-                  <View style={{alignSelf: 'center', marginTop: '20%'}}>
+                  <View style={styles.indicatorWrapper}>
                     <ActivityIndicator size="large" />
                   </View>
                 )}
@@ -219,7 +218,8 @@ export default class HomeScreen extends Component {
             );
           }}
         </AuthContext.Consumer>
-      </ScrollView>
+        {/* </ScrollView> */}
+      </View>
     );
   }
 }
