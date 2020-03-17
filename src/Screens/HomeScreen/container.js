@@ -156,7 +156,6 @@ export default class HomeScreen extends Component {
   render() {
     const {currentTime, isPaused, video, commentText} = this.state;
     return (
-      // <ScrollView>
       <View style={styles.fullFlex}>
         <AuthContext.Consumer>
           {props => {
@@ -218,7 +217,6 @@ export default class HomeScreen extends Component {
             );
           }}
         </AuthContext.Consumer>
-        {/* </ScrollView> */}
       </View>
     );
   }
